@@ -22,26 +22,7 @@ namespace Leo.Extensions
                 if (pieces.Length == 1) pieces = new string[] { pieces[0], "0" };
                 string iPart = pieces[0], dPart = pieces[1];
 
-                if (scientificNotation)
-                    scientificNotation = iPart.Length + dPart.Length > useScientificNotationLength;
-
-                if (!scientificNotation)
-                {
-                    int dPrecision = precision - iPart.Length;
-
-                    if (dPrecision > 0)
-                    {
-                        ret = $"{iPart}.{dPart.PadLeft(dPrecision, '0').Substring(0, dPrecision)}";
-                    }
-                    else
-                    {
-                        ret = iPart;
-                    }
-                }
-                else
-                {
-                    ret = value.ToScientificNotation(precision);
-                }
+                ret = NumberTools.ValidDecimal(iPart, dPart, precision, scientificNotation, useScientificNotationLength);
             }
             else
             {
